@@ -23,12 +23,13 @@ function askGuess() {
         }
 
         else if (counter === 0) {
-            console.log("Nice try!")
+            console.log("Nice try!");
+            console.log('The correct number is: ' + secretNumber)
             rl.close()
             return
         }
-        else{
-        return askGuess()
+        else {
+            return askGuess()
         }
     }
 
