@@ -12,14 +12,28 @@ function randomInRange(min, max) {
 }
 
 
-
+let counter = 5;
 
 function askGuess() {
     rl.question('Enter a Guess: ', (answer) => {
-        checkGuess(Number(answer))
+        counter--
+        if (checkGuess(Number(answer))) {
+            rl.close()
+            return
+        }
+
+        else if (counter === 0) {
+            console.log("Nice try!")
+            rl.close()
+            return
+        }
+        else{
         return askGuess()
-    },
-        askGuess
+        }
+    }
+
+
+
     )
 }
 
@@ -28,54 +42,46 @@ function askGuess() {
 function askRange() {
     rl.question(
         "Enter a max number: ",
-    (max) => {
-        let fmax = Number(max)
-        console.log(fmax)
+        (max) => {
+            let fmax = Number(max)
+            console.log(fmax)
 
-        rl.question(
-            "Enter a min number: ",
-            (min) => {
-                let fmin = Number(min)
-                console.log(fmin)
-                secretNumber = randomInRange(fmin, fmax)
-                console.log(`I'm thinking of a number between ${min} and ${max}`)
-                askGuess(secretNumber)
-            }
-        )
-    }
-)
+            rl.question(
+                "Enter a min number: ",
+                (min) => {
+                    let fmin = Number(min)
+                    console.log(fmin)
+                    secretNumber = randomInRange(fmin, fmax)
+                    console.log(`I'm thinking of a number between ${min} and ${max}`)
+                    askGuess(secretNumber)
+                }
+            )
+        }
+    )
 }
 
 let secretNumber;
 
-let counter = 5;
+
 
 const checkGuess = (num) => {
     if (num > secretNumber) {
         console.log("Too high");
-        counter--
-    if(counter === 0 ){
-        console.log("Nice try!")
-        rl.close()
+        return false;
     }
-        return false
-    }
+
+
     else if (num < secretNumber) {
         console.log("Too low");
-        counter--
-        if(counter === 0 ){
-            console.log("Nice try!")
-            rl.close()
-        }
-            return false
+        return false;
     }
-       else{
-        console.log("You win!");
 
-       }
-       return true
+    else {
+        console.log("You win!");
+        return true;
+    }
+
 
 }
 
 askRange()
-
