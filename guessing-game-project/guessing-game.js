@@ -45,13 +45,10 @@ function askRange() {
         "Enter a max number: ",
         (max) => {
             let fmax = Number(max)
-            console.log(fmax)
-
             rl.question(
                 "Enter a min number: ",
                 (min) => {
                     let fmin = Number(min)
-                    console.log(fmin)
                     secretNumber = randomInRange(fmin, fmax)
                     console.log(`I'm thinking of a number between ${min} and ${max}`)
                     askGuess(secretNumber)
